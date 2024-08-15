@@ -27,10 +27,15 @@ function throttle(fn, threshhold, scope) {
   };
 }
 
+var scrollY = 0;
 document.addEventListener(
   "scroll",
   throttle(() => {
-    displayNames(10);
+    let newScrollY = document.documentElement.scrollTop;
+    if (newScrollY > scrollY) {
+      displayNames(10);
+    }
+    scrollY = newScrollY;
   }, 1000)
 );
 
