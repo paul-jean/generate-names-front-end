@@ -33,6 +33,7 @@ document.addEventListener(
   throttle(() => {
     let newScrollY = document.documentElement.scrollTop;
     if (newScrollY > scrollY) {
+      console.log("Adding 10 names ...");
       displayNames(10);
     }
     scrollY = newScrollY;
@@ -75,7 +76,7 @@ function displayNames(num_rows) {
         var rowdiv = $("<div>", { class: "row" });
         for (j = 0; j < numCols; j++) {
           var name = generateName(adj_matrix);
-          coldiv = `<div class="col"><div class="name text-left">${name}</div> </div>`;
+          coldiv = `<div class="col"><div class="name text-left mt-2 ml-2 lead"><strong>${name}</strong></div> </div>`;
           rowdiv.append(coldiv);
         }
         $(div).append(rowdiv);
