@@ -73,13 +73,34 @@ function displayNames(num_rows) {
       var viewport = window.visualViewport.width;
       var numCols = Math.floor(viewport / 400) + 1;
       for (i = 0; i < num_rows; i++) {
-        var rowdiv = $("<div>", { class: "row" });
+        var rowDiv = $("<div>", { class: "row" });
         for (j = 0; j < numCols; j++) {
           var name = generateName(adj_matrix);
-          coldiv = `<div class="col"><div class="name text-left mt-2 ml-2 lead"><strong>${name}</strong></div> </div>`;
-          rowdiv.append(coldiv);
+          let nameDiv = $(
+            `<div class="name text-left mt-2 ml-2 lead"><strong>${name}</strong></div>`
+          );
+          async function writeClipboardText(text) {
+            console.log(`writing ${text} to clipboard`);
+            try {
+              await navigator.clipboard.writeText(text);
+            } catch (error) {
+              console.error(error.message);
+            }
+          }
+          nameDiv.click(() => {
+            navigator.permissions
+              .query({ name: "clipboard-write" })
+              .then((result) => {
+                if (result.state === "granted" || result.state === "prompt") {
+                  writeClipboardText(name);
+                }
+              });
+          });
+          colDiv = $(`<div class="col"></div>`);
+          colDiv.append(nameDiv);
+          rowDiv.append(colDiv);
         }
-        $(div).append(rowdiv);
+        $(div).append(rowDiv);
       }
     },
   });
