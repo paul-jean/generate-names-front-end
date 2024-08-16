@@ -75,7 +75,7 @@ function displayNames(num_rows) {
       for (i = 0; i < num_rows; i++) {
         var rowDiv = $("<div>", { class: "row" });
         for (j = 0; j < numCols; j++) {
-          var name = generateName(adj_matrix);
+          let name = generateName(adj_matrix);
           let nameDiv = $(
             `<div class="name text-left mt-2 ml-2 lead"><strong>${name}</strong></div>`
           );
@@ -88,13 +88,7 @@ function displayNames(num_rows) {
             }
           }
           nameDiv.click(() => {
-            navigator.permissions
-              .query({ name: "clipboard-write" })
-              .then((result) => {
-                if (result.state === "granted" || result.state === "prompt") {
-                  writeClipboardText(name);
-                }
-              });
+            writeClipboardText(name);
           });
           colDiv = $(`<div class="col"></div>`);
           colDiv.append(nameDiv);
