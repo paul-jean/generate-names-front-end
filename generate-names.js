@@ -77,8 +77,9 @@ function displayNames(num_rows) {
         for (j = 0; j < numCols; j++) {
           let name = generateName(adj_matrix);
           let nameDiv = $(
-            `<div class="name text-left mt-2 ml-2 lead"><strong>${name}</strong></div>`
+            `<div class="name text-left mt-2 ml-2 lead"> <strong>${name}</strong></div>`
           );
+          let copyButton = $(`<img src="copy.png"/>`);
           async function writeClipboardText(text) {
             console.log(`writing ${text} to clipboard`);
             try {
@@ -87,10 +88,11 @@ function displayNames(num_rows) {
               console.error(error.message);
             }
           }
-          nameDiv.click(() => {
+          copyButton.click(() => {
             writeClipboardText(name);
           });
           colDiv = $(`<div class="col"></div>`);
+          nameDiv.prepend(copyButton);
           colDiv.append(nameDiv);
           rowDiv.append(colDiv);
         }
