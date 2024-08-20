@@ -77,7 +77,7 @@ function displayNames(num_rows) {
         for (j = 0; j < numCols; j++) {
           let name = generateName(adj_matrix);
           let nameDiv = $(
-            `<div class="name text-left mt-2 ml-2 lead"> <strong>${name}</strong></p></div>`
+            `<div class="name text-left mt-2 ml-2 lead"> <strong>${name}</strong></div>`
           );
           let copyButton =  $(`<img src="copy.png"/> `);
           async function writeClipboardText(text) {
