@@ -79,7 +79,7 @@ function displayNames(num_rows) {
           let nameDiv = $(
             `<div class="name text-left mt-2 ml-2 lead"> <strong>${name}</strong></div>`
           );
-          let copyButton =  $(`<img src="copy.png"/> `);
+          let copyButton = $(`<img src="copy.png"/>`);
           async function writeClipboardText(text) {
             console.log(`writing ${text} to clipboard`);
             try {
