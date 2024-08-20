@@ -67,7 +67,7 @@ function displayNames(num_rows) {
   console.log("displayNames");
   $.ajax({
     dataType: "json",
-    url: "http://www.rule146.com/name-space/adj-matrix-neutral.json",
+    url: "https://first-name-generator-5cb32459f194.herokuapp.com/static/adj-matrix-nordic.json",
     success: function (adj_matrix) {
       var div = $("#names");
       var viewport = window.visualViewport.width;
