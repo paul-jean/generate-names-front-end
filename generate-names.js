@@ -1,10 +1,15 @@
 (function () {
   window.addEventListener("load", () => {
+    console.log("load event");
     displayNames(100);
   });
-  $(".dropdown-item a").click((event) => {
-    $("#names").html("");
-    displayNames(100, event.target.dataLang);
+  window.addEventListener("DOMContentLoaded", () => {
+    debugger;
+    $("a.dropdown-item").click((event) => {
+      debugger;
+      $("#names").html("");
+      displayNames(100, event.target.dataLang);
+    });
   });
 })();
 
