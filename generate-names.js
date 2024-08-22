@@ -2,6 +2,10 @@
   window.addEventListener("load", () => {
     displayNames(100);
   });
+  $(".dropdown-item a").click((event) => {
+    $("#names").html("");
+    displayNames(100, event.target.dataLang);
+  });
 })();
 
 // https://gist.github.com/ionurboz/51b505ee3281cd713747b4a84d69f434
@@ -63,8 +67,15 @@ function generateName(adj_matrix) {
   return generatedName.join("");
 }
 
-function displayNames(num_rows) {
+var matrixTypeToFile = {
+  nordic: "adj-matrix-nordic-full",
+  social: "adj-matrix-neutral",
+};
+
+function displayNames(num_rows, matrix_type) {
   console.log("displayNames");
+  let matrix_fname = matrixTypeToFile[matrix_type];
+  let url = `https://first-name-generator-5cb32459f194.herokuapp.com/static/${matrix_fname}.json`;
   $.ajax({
     dataType: "json",
     url: "https://first-name-generator-5cb32459f194.herokuapp.com/static/adj-matrix-nordic-full.json",
