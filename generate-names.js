@@ -50,7 +50,7 @@ document.addEventListener(
 );
 
 function generateName(adj_matrix) {
-  var firstLetterIndex = getRandomIntInclusive(0, 25);
+  var firstLetterIndex = getRandomIntInclusive(0, adj_matrix.length - 1);
   var numLetters = getRandomIntInclusive(5, 15);
   var i = 0,
     firstLetter;
