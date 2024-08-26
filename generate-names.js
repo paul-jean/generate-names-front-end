@@ -1,9 +1,12 @@
+var corpus = "social";
+
 (function () {
   window.addEventListener("DOMContentLoaded", () => {
-    displayNames(100, "social");
+    displayNames(100, corpus);
     $("a.dropdown-item").click((event) => {
       $("#names").html("");
-      displayNames(100, $(event.target).data('lang'));
+      corpus = $(event.target).data('lang');
+      displayNames(100, corpus);
     });
   });
 })();
@@ -38,7 +41,7 @@ document.addEventListener(
     let newScrollY = document.documentElement.scrollTop;
     if (newScrollY > scrollY) {
       console.log("Adding 10 names ...");
-      displayNames(10);
+      displayNames(10, corpus);
     }
     scrollY = newScrollY;
   }, 1000)
@@ -77,7 +80,7 @@ function displayNames(num_rows, matrix_type) {
   console.log("displayNames");
   let matrix_fname = matrixTypeToFile[matrix_type];
   console.log(matrix_fname);
-  let matrixurl = `data/${matrix_fname}.json`;
+  let matrixurl = `https://first-name-generator-5cb32459f194.herokuapp.com/static/${matrix_fname}.json`;
   console.log(matrixurl);
   $.ajax({
     dataType: "json",
