@@ -1,14 +1,12 @@
+var corpus = "social";
+
 (function () {
-  window.addEventListener("load", () => {
-    console.log("load event");
-    displayNames(100);
-  });
   window.addEventListener("DOMContentLoaded", () => {
-    debugger;
+    displayNames(100, corpus);
     $("a.dropdown-item").click((event) => {
-      debugger;
       $("#names").html("");
-      displayNames(100, event.target.dataLang);
+      corpus = $(event.target).data('lang');
+      displayNames(100, corpus);
     });
   });
 })();
@@ -43,14 +41,15 @@ document.addEventListener(
     let newScrollY = document.documentElement.scrollTop;
     if (newScrollY > scrollY) {
       console.log("Adding 10 names ...");
-      displayNames(10);
+      displayNames(10, corpus);
     }
     scrollY = newScrollY;
   }, 1000)
 );
 
 function generateName(adj_matrix) {
-  var firstLetterIndex = getRandomIntInclusive(0, 25);
+  var firstLetterIndex = getRandomIntInclusive(0, adj_matrix.length
+     - 1);
   var numLetters = getRandomIntInclusive(5, 15);
   var i = 0,
     firstLetter;
@@ -80,10 +79,12 @@ var matrixTypeToFile = {
 function displayNames(num_rows, matrix_type) {
   console.log("displayNames");
   let matrix_fname = matrixTypeToFile[matrix_type];
-  let url = `https://first-name-generator-5cb32459f194.herokuapp.com/static/${matrix_fname}.json`;
+  console.log(matrix_fname);
+  let matrixurl = `https://first-name-generator-5cb32459f194.herokuapp.com/static/${matrix_fname}.json`;
+  console.log(matrixurl);
   $.ajax({
     dataType: "json",
-    url: "https://first-name-generator-5cb32459f194.herokuapp.com/static/adj-matrix-nordic-full.json",
+    url: matrixurl,
     success: function (adj_matrix) {
       var div = $("#names");
       var viewport = window.visualViewport.width;
